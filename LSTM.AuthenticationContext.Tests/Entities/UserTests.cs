@@ -59,15 +59,7 @@ namespace LSTM.AuthenticationContext.Tests.Entities
         }
 
 
-        [TestMethod]
-        [TestCategory("User - Authenticating User")]
-        public void Should_Return_Failure_When_Authenticate_A_Invalid_Username()
-        {
-            var user = new User("Alexandre Miranda", "alexandre", "123456", _email);
-            var authenticationReturn = user.Authenticate("", "123456");
-            Assert.IsTrue(authenticationReturn.Equals(Domain.Enums.ELoginStatus.Failure));
-        }
-
+        
         [TestMethod]
         [TestCategory("User - Authenticating User")]
         public void Should_Return_Failure_When_Authenticate_A_Invalid_Password()
