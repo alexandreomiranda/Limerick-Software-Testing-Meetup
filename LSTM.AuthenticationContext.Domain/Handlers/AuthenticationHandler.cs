@@ -1,9 +1,6 @@
 ﻿using Flunt.Notifications;
 using LSTM.AuthenticationContext.Domain.Commands;
 using LSTM.AuthenticationContext.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LSTM.AuthenticationContext.Domain.Handlers
 {
@@ -32,7 +29,7 @@ namespace LSTM.AuthenticationContext.Domain.Handlers
             if (Invalid)
                 return new CommandResult(false, "User not authenticated", Notifications);
 
-            return null;
+            return new CommandResult(true, "User authenticated succesfully", user.Name);
         }
         
     }
