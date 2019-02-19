@@ -65,7 +65,7 @@ namespace LSTM.AuthenticationContext.Tests.Entities
         public void Should_Return_Failure_When_Authenticate_A_Invalid_Password()
         {
             var user = new User("Alexandre Miranda", "alexandre", "123456", _email);
-            var authenticationReturn = user.Authenticate("alexandre", "456456");
+            var authenticationReturn = user.Authenticate("456456");
             Assert.IsTrue(authenticationReturn.Equals(Domain.Enums.ELoginStatus.Failure));
         }
 
@@ -75,7 +75,7 @@ namespace LSTM.AuthenticationContext.Tests.Entities
         {
             var user = new User("Alexandre Miranda", "alexandre", "123456", _email);
             user.Lock();
-            var authenticationReturn = user.Authenticate("alexandre", "123456");
+            var authenticationReturn = user.Authenticate("123456");
             Assert.IsTrue(authenticationReturn.Equals(Domain.Enums.ELoginStatus.LockedOut));
         }
 
@@ -85,7 +85,7 @@ namespace LSTM.AuthenticationContext.Tests.Entities
         {
             var user = new User("Alexandre Miranda", "alexandre", "123456", _email);
             user.Deactivate();
-            var authenticationReturn = user.Authenticate("alexandre", "123456");
+            var authenticationReturn = user.Authenticate("123456");
             Assert.IsTrue(authenticationReturn.Equals(Domain.Enums.ELoginStatus.Failure));
         }
 
@@ -94,7 +94,7 @@ namespace LSTM.AuthenticationContext.Tests.Entities
         public void Should_Return_Success_When_Authenticate_A_Valid_User()
         {
             var user = new User("Alexandre Miranda", "alexandre", "123456", _email);
-            var authenticationReturn = user.Authenticate("alexandre", "123456");
+            var authenticationReturn = user.Authenticate("123456");
             Assert.IsTrue(authenticationReturn.Equals(Domain.Enums.ELoginStatus.Success));
         }
 

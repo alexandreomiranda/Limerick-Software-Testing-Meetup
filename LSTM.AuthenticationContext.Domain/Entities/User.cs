@@ -75,27 +75,33 @@ namespace LSTM.AuthenticationContext.Domain.Entities
             Unlock();
             Password = password;
         }
-        public ELoginStatus Authenticate(string username, string password)
+        public ELoginStatus Authenticate(string password)
         {
             if (!Active)
+            {
+                AddNotification("User", "Deactivated user");
                 return ELoginStatus.Failure;
-
+            }
             if (Locked)
+            {
+                AddNotification("User", "Locked user");
                 return ELoginStatus.LockedOut;
-
+            }
             if (ExpirationDatePassword < DateTime.Now)
             {
                 Lock();
+                AddNotification("User", "Locked user");
                 return ELoginStatus.LockedOut;
             }
 
-            if (Username == username && Password == EncryptPassword(password))
+            if (Password == EncryptPassword(password))
             {
                 LastLoginDate = DateTime.Now;
                 return ELoginStatus.Success;
             }
             else
             {
+                AddNotification("User", "Login failed");
                 return ELoginStatus.Failure;
             }
 
